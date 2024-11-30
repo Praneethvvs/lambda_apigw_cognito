@@ -1,0 +1,11 @@
+vpc:
+  lookup_id: "vpc-0cce35cd34ab20622"
+
+
+lambda_function:
+  ecr_repo_name: "docquerysystem_rag_application"
+  memory_size: 512
+  timeout: 2
+  
+
+
