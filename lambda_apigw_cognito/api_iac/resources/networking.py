@@ -5,7 +5,7 @@ from validators.api_config_validator import VpcConfig
 from validators.env_config_validator import EnvConfig
 
 
-def create_vpc(stack: Stack, env_config: EnvConfig, resource_config: VpcConfig):
+def create_or_lookup_vpc(stack: Stack, env_config: EnvConfig, resource_config: VpcConfig):
     vpc = ec2.Vpc.from_lookup(
         stack,
         f"{env_config.PROJECT_NAME}-{env_config.ENV}-Vpc",

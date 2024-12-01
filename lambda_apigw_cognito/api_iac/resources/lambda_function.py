@@ -66,4 +66,14 @@ def create_authorizer(
         }
     )
 
+    managed_policies = [
+        "AmazonSSMFullAccess",
+    ]
+
+    for policy in managed_policies:
+        lambda_authorizer.role.add_managed_policy(
+            iam.ManagedPolicy.from_aws_managed_policy_name(policy)
+        )
+
+
     return lambda_authorizer

@@ -26,7 +26,7 @@ class ApiStack(Stack):
 
     def init_resources(self):
 
-        self.vpc = networking.create_vpc(
+        self.vpc = networking.create_or_lookup_vpc(
             self, env_config=self.env_config, resource_config=self.api_config.vpc
         )
 
@@ -44,21 +44,12 @@ class ApiStack(Stack):
             env_config=self.env_config,
         )
      
-
+        
 
         self.api_gw, self.api_gw_url = api_gw.create_apigw(self, 
                                           lambda_function_api=self.lambda_function_api, 
                                           env_config=self.env_config,
-                                          lambda_authorizer=self.lambda_authorizer)
-        
-        self.lambda_authorizer.add_environment('API_GATEWAY_URL', self.api_gw_url)
-
-        CfnOutput(
-            self, "ApiGatewayUrl",
-            value=self.api_gw_url,  # URL of the API Gateway
-            description="The URL of the API Gateway",
-            export_name="ApiGatewayEndpoint"
-        )
+                                          lambda_authorizer=self.lambda_authorizer)        
 
 
 
